@@ -20,4 +20,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest fastapi uvicorn  # Nuestras herramientas base
       - name: Run Unit Tests (Q1)
+        env:
+          PYTHONPATH: .
         run: pytest src/backend/tests
