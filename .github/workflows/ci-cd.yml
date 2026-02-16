@@ -47,7 +47,7 @@ jobs:
     # Este trabajo solo se ejecuta si el anterior (tests) termina en verde
     needs: quality-and-tests
     # Solo se despliega si el código llega a la rama 'main'
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.ref_name == 'main'
     runs-on: ubuntu-latest
     
     steps:
