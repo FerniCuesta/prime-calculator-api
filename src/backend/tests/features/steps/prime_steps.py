@@ -27,3 +27,14 @@ def step_then_check_discount(context, expected_eligibility):
     actual_eligibility = "Eligible" if context.result else "Not Eligible"
     error_msg = f"Esperaba {expected_eligibility}"
     assert actual_eligibility == expected_eligibility, error_msg
+
+
+@when('pido el siguiente número primo')
+def step_when_get_next_prime(context):
+    from src.backend.calculator import get_next_prime
+    context.next_prime_result = get_next_prime(context.input_number)
+
+
+@then('el resultado debe ser {expected:d}')
+def step_then_check_next_prime(context, expected):
+    assert context.next_prime_result == expected
