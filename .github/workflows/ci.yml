@@ -1,4 +1,4 @@
-name: CI-Pipeline
+name: CI-Pipeline-Prime-API
 
 on:
   push:
@@ -11,15 +11,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.12'
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest fastapi uvicorn  # Nuestras herramientas base
+          pip install -r requirements.txt
+          pip install flake8
+
+      # PASO Q4: Análisis estático
+      - name: Static Analysis - Linter (Q4)
+        run: flake8 src/backend --count --statistics
+
+      # PASO Q1: Tests unitarios (TDD)
       - name: Run Unit Tests (Q1)
         env:
           PYTHONPATH: .
         run: pytest src/backend/tests
+
+      # PASO Q2: Tests de aceptación (Negocio)
+      - name: Run Acceptance Tests (Q2)
+        env:
+          PYTHONPATH: .
+        run: behave src/backend/tests/features/
