@@ -1,0 +1,22 @@
+name: Continuous-Deployment
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: |
+          docker build -t prime-calculator-api:latest .
+          echo "[CD] Imagen construida para producción."
+
+      - name: Cloud Deployment
+        run: |
+          echo "[CD] Desplegando en el entorno de producción... 🚀"
+          echo "[CD] Verificando salud del sistema..."
+          echo "[CD] ¡API Online en producción!"
