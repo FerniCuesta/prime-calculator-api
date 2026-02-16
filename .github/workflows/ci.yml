@@ -1,18 +1,15 @@
-name: CI-Pipeline-Prime-API
+name: Continuous-Integration
 
 on:
-  push:
-    branches: [ main, dev ]
   pull_request:
     branches: [ main, dev ]
 
 jobs:
-  build-and-test:
+  quality-and-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
+      - name: Set up Python 3.12
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
@@ -23,18 +20,15 @@ jobs:
           pip install -r requirements.txt
           pip install flake8
 
-      # PASO Q4: Análisis estático
-      - name: Static Analysis - Linter (Q4)
+      - name: Static Analysis (Q4)
         run: flake8 src/backend --count --statistics
 
-      # PASO Q1: Tests unitarios (TDD)
-      - name: Run Unit Tests (Q1)
+      - name: Unit Tests (Q1)
         env:
           PYTHONPATH: .
         run: pytest src/backend/tests
 
-      # PASO Q2: Tests de aceptación (Negocio)
-      - name: Run Acceptance Tests (Q2)
+      - name: Acceptance Tests (Q2)
         env:
           PYTHONPATH: .
         run: behave src/backend/tests/features/
