@@ -10,3 +10,7 @@ def test_is_prime_basic():
 
 def test_get_next_prime_after_10_is_11():
     assert get_next_prime(10) == 11
+
+
+def test_get_next_prime_after_11_is_13():
+    assert get_next_prime(11) == 13
