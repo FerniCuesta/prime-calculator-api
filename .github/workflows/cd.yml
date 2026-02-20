@@ -17,11 +17,11 @@ jobs:
 
       - name: Push Docker Image to Docker Hub
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          docker tag prime-calculator-api:latest $DOCKER_USERNAME/prime-calculator-api:latest
-          docker push $DOCKER_USERNAME/prime-calculator-api:latest
+          echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+          docker tag prime-calculator-api:latest $DOCKERHUB_USERNAME/prime-calculator-api:latest
+          docker push $DOCKERHUB_USERNAME/prime-calculator-api:latest
           echo "[CD] Imagen subida a Docker Hub."
 
