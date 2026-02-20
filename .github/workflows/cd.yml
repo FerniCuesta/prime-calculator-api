@@ -2,7 +2,9 @@ name: Continuous-Deployment
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   deploy-production:
@@ -15,8 +17,13 @@ jobs:
           docker build -t prime-calculator-api:latest .
           echo "[CD] Imagen construida para producción."
 
-      - name: Cloud Deployment
+      - name: Push Docker Image to Docker Hub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
         run: |
-          echo "[CD] Desplegando en el entorno de producción... 🚀"
-          echo "[CD] Verificando salud del sistema..."
-          echo "[CD] ¡API Online en producción!"
+          echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker tag prime-calculator-api:latest $DOCKER_USERNAME/prime-calculator-api:latest
+          docker push $DOCKER_USERNAME/prime-calculator-api:latest
+          echo "[CD] Imagen subida a Docker Hub."
+
