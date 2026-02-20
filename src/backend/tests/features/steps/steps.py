@@ -43,5 +43,9 @@ def step_when_get_next_prime(context):
 @then('the result should be {expected:d}')
 def step_then_check_next_prime(context, expected):
     """Valida el resultado numérico del siguiente primo."""
-    error_msg = f"Error de lógica: El siguiente primo de {context.input_number} debería ser {expected}, pero el sistema devolvió {context.next_prime_result}"
+    error_msg = (
+        f"Error de lógica: El siguiente primo de {context.input_number} "
+        f"debería ser {expected}, pero el sistema devolvió "
+        f"{context.next_prime_result}"
+    )
     assert context.next_prime_result == expected, error_msg
