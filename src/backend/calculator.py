@@ -9,8 +9,8 @@ def is_prime(n):
 
 
 def get_next_prime(n: int) -> int:
-    """Busca el próximo número primo (ESTE CÓDIGO TIENE UN ERROR)."""
-    next_num = n
+    """Busca el próximo número primo."""
+    next_num = n + 1
     while not is_prime(next_num):
         next_num += 1
     return next_num
