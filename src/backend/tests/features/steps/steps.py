@@ -1,6 +1,5 @@
 from behave import given, when, then
 from src.backend.calculator import is_prime
-from src.backend.calculator import get_next_prime
 
 
 @given('the input number is {number:d}')
