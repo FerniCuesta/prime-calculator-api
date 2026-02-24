@@ -1,5 +1,4 @@
 from src.backend.calculator import is_prime
-from src.backend.calculator import get_next_prime
 
 
 def test_is_prime_basic():
