@@ -1,4 +1,4 @@
-Caracteristica: Find the next prime number
+Feature: Find the next prime number
     As a user of the discount system
     I want to know what the next prime number is after my input
     So I know when my next discount will be
