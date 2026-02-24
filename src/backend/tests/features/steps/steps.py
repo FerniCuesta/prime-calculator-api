@@ -29,3 +29,23 @@ def step_then_check_discount(context, expected_eligibility):
     actual_eligibility = "Eligible" if context.result else "Not Eligible"
     error_msg = f"Esperaba {expected_eligibility}"
     assert actual_eligibility == expected_eligibility, error_msg
+
+# Caso 2: Find the next prime number
+
+
+@given('that the input number is {number:d}')
+def step_given_input_number_alt(context, number):
+    # Guardamos el número en el contexto
+    context.input_number = number
+
+
+@when('I ask for the next prime number')
+def step_when_get_next_prime(context):
+    from src.backend.calculator import get_next_prime
+    context.next_prime_result = get_next_prime(context.input_number)
+
+
+@then('the result should be {expected:d}')
+def step_then_check_next_prime(context, expected):
+    error_msg = f"Esperaba {expected} pero obtuvo {context.next_prime_result}"
+    assert context.next_prime_result == expected, error_msg
